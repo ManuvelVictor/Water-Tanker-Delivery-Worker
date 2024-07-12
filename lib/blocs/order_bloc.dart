@@ -14,11 +14,9 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   Future<void> _onFetchAssignedOrders(
       FetchAssignedOrdersEvent event, Emitter<OrdersState> emit) async {
     try {
-      final ordersQuery = firestore.FirebaseFirestore.instance
-          .collection('orders');
-      final ordersSnapshot = await ordersQuery.get();
+      final ordersQuery = await firestore.FirebaseFirestore.instance.collection('orders').where('assignedWorkerId', isEqualTo: 'default_worker_id').get();
 
-      final assignedOrders = ordersSnapshot.docs
+      final assignedOrders = ordersQuery.docs
           .map((doc) => Order.fromDocument(doc))
           .toList();
 

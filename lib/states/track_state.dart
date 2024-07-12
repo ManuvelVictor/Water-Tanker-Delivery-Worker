@@ -1,24 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class TrackOrderState extends Equatable {
-  final String? orderLocation;
-  final bool isTracking;
+  final LatLng? currentPosition;
 
-  const TrackOrderState({
-    required this.orderLocation,
-    required this.isTracking,
-  });
+  const TrackOrderState({this.currentPosition});
 
-  TrackOrderState copyWith({
-    String? orderLocation,
-    bool? isTracking,
-  }) {
+  TrackOrderState copyWith({LatLng? currentPosition}) {
     return TrackOrderState(
-      orderLocation: orderLocation ?? this.orderLocation,
-      isTracking: isTracking ?? this.isTracking,
+      currentPosition: currentPosition ?? this.currentPosition,
     );
   }
 
   @override
-  List<Object?> get props => [orderLocation, isTracking];
+  List<Object?> get props => [currentPosition];
 }
