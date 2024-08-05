@@ -1,7 +1,19 @@
-abstract class TrackOrderEvent {}
+import 'package:equatable/equatable.dart';
 
-class RefreshLocationEvent extends TrackOrderEvent {
+abstract class TrackOrderEvent extends Equatable {
+  const TrackOrderEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class StartTrackingEvent extends TrackOrderEvent {
   final String orderId;
 
-  RefreshLocationEvent(this.orderId);
+  const StartTrackingEvent(this.orderId);
+
+  @override
+  List<Object> get props => [orderId];
 }
+
+class StopTrackingEvent extends TrackOrderEvent {}

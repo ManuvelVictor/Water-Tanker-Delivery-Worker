@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:water_tanker_worker/screens/track_screen.dart';
 import '../blocs/order_bloc.dart';
 import '../states/order_state.dart';
 
@@ -29,7 +29,7 @@ class OrdersScreen extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Total Amount: \$${ordersState.totalAmount.toStringAsFixed(2)}',
+                  'Total Amount: ₹${ordersState.totalAmount.toStringAsFixed(2)}',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
@@ -46,9 +46,16 @@ class OrdersScreen extends StatelessWidget {
                               '${order.numberOfTanks} tanks, ${order.location}'),
                           trailing: ElevatedButton(
                             onPressed: () {
-                              // Navigate to track order location
-                              Navigator.pushNamed(context, '/trackOrder',
-                                  arguments: order.userName);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TrackOrderScreen(
+                                    orderId: order.id,
+                                    latitude: order.latitude,
+                                    longitude: order.longitude,
+                                  ),
+                                ),
+                              );
                             },
                             child: const Text(
                               'Track Location',
